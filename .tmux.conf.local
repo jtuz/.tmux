@@ -45,24 +45,25 @@ tmux_conf_new_session_prompt=false
 #  - false (default)
 tmux_conf_24b_colour=false
 
-# default theme
-tmux_conf_theme_colour_1="#080808"    # dark gray
-tmux_conf_theme_colour_2="#303030"    # gray
-tmux_conf_theme_colour_3="#8a8a8a"    # light gray
-tmux_conf_theme_colour_4="#00afff"    # light blue
-tmux_conf_theme_colour_5="#ffff00"    # yellow
-tmux_conf_theme_colour_6="#080808"    # dark gray
-tmux_conf_theme_colour_7="#e4e4e4"    # white
-tmux_conf_theme_colour_8="#080808"    # dark gray
-tmux_conf_theme_colour_9="#ffff00"    # yellow
-tmux_conf_theme_colour_10="#ff00af"   # pink
-tmux_conf_theme_colour_11="#5fff00"   # green
-tmux_conf_theme_colour_12="#8a8a8a"   # light gray
-tmux_conf_theme_colour_13="#e4e4e4"   # white
-tmux_conf_theme_colour_14="#080808"   # dark gray
-tmux_conf_theme_colour_15="#080808"   # dark gray
-tmux_conf_theme_colour_16="#d70000"   # red
-tmux_conf_theme_colour_17="#e4e4e4"   # white
+# default theme (Tokyonight)
+tmux_conf_theme_colour_1="#1A1B26"    # dark gray
+tmux_conf_theme_colour_2="#40486A"    # gray
+tmux_conf_theme_colour_3="#646c7e"    # light gray
+tmux_conf_theme_colour_4="#0db9d7"    # light blue
+tmux_conf_theme_colour_5="#e7c787"    # yellow
+tmux_conf_theme_colour_6="#1A1B26"    # dark gray
+tmux_conf_theme_colour_7="#c0caf5"    # white
+tmux_conf_theme_colour_8="#1A1B26"    # dark gray
+tmux_conf_theme_colour_9="#e7c787"    # yellow
+tmux_conf_theme_colour_10="#ff75a0"   # pink
+tmux_conf_theme_colour_11="#9ece6a"   # green
+tmux_conf_theme_colour_12="#646c7e"   # light gray
+tmux_conf_theme_colour_13="#c0caf5"   # white
+tmux_conf_theme_colour_14="#1A1B26"   # dark gray
+tmux_conf_theme_colour_15="#1A1B26"   # dark gray
+tmux_conf_theme_colour_16="#f7768a"   # red
+tmux_conf_theme_colour_17="#c0caf5"   # white
+tmux_conf_theme_colour_18="#9d7cd8"   # dark purple
 
 # default theme (ansi)
 #tmux_conf_theme_colour_1="colour0"
@@ -191,9 +192,9 @@ tmux_conf_theme_window_status_last_attr="none"
 
 # status left/right sections separators
 tmux_conf_theme_left_separator_main=""
-tmux_conf_theme_left_separator_sub="|"
+tmux_conf_theme_left_separator_sub=""
 tmux_conf_theme_right_separator_main=""
-tmux_conf_theme_right_separator_sub="|"
+tmux_conf_theme_right_separator_sub=""
 #tmux_conf_theme_left_separator_main='\uE0B0'  # /!\ you don't need to install Powerline
 #tmux_conf_theme_left_separator_sub='\uE0B1'   #   you only need fonts patched with
 #tmux_conf_theme_right_separator_main='\uE0B2' #   Powerline symbols or the standalone
@@ -227,17 +228,18 @@ tmux_conf_theme_right_separator_sub="|"
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
-tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
+tmux_conf_theme_status_right=" #{prefix}#{pairing}#{synchronized} | #{username}#{root} | #{hostname} "
+# tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
 
 # status left style
-tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
-tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_9,$tmux_conf_theme_colour_10,$tmux_conf_theme_colour_11"
-tmux_conf_theme_status_left_attr="bold,none,none"
+tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_1,$tmux_conf_theme_colour_8"
+tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_18,$tmux_conf_theme_colour_11,$tmux_conf_theme_colour_11"
+tmux_conf_theme_status_left_attr="bold,bold,none"
 
 # status right style
-tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_13,$tmux_conf_theme_colour_14"
+tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_1,$tmux_conf_theme_colour_14"
 tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_15,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_17"
-tmux_conf_theme_status_right_attr="none,none,bold"
+tmux_conf_theme_status_right_attr="none,bold,bold"
 
 # pairing indicator
 tmux_conf_theme_pairing="⚇"                 # U+2687
@@ -327,7 +329,10 @@ tmux_conf_copy_to_os_clipboard=false
 # this is the place to override or undo settings
 
 # increase history size
-#set -g history-limit 10000
+set -g history-limit 10000
+
+# split window vertical
+bind | split-window -h
 
 # start with mouse mode enabled
 #set -g mouse on
@@ -383,7 +388,9 @@ tmux_conf_uninstall_plugins_on_reload=true
 
 # to enable a plugin, use the 'set -g @plugin' syntax:
 # visit https://github.com/tmux-plugins for available plugins
-#set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-open'
 #set -g @plugin 'tmux-plugins/tmux-cpu'
 #set -g @plugin 'tmux-plugins/tmux-resurrect'
 #set -g @plugin 'tmux-plugins/tmux-continuum'
@@ -416,3 +423,7 @@ tmux_conf_uninstall_plugins_on_reload=true
 #
 # "$@"
 # # /!\ do not remove the previous line
+# some patches needed
+set -g @open-S 'https://www.google.com/search?q='
+# set-option -sa terminal-overrides ',*256col*:RGB'
+# set-option -ga terminal-overrides ',*256col*:Tc'
